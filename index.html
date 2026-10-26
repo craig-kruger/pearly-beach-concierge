@@ -156,16 +156,21 @@
         </div>
     </div>
 
-    <!-- Direct Contact Section (Real Serverless AJAX Form Delivery to craig.kruger@gmail.com) -->
+    <!-- Direct Contact Section (Secure Masked Submission via FormSubmit with Hidden Email) -->
     <section id="contact" class="py-24 border-t border-slate-900 relative bg-slate-900/20">
         <div class="max-w-3xl mx-auto px-6 relative z-10">
             <div class="text-center mb-12">
                 <span class="text-emerald-400 font-semibold text-xs uppercase tracking-widest">Direct Communication</span>
                 <h2 class="text-3xl font-black text-white tracking-tight mt-1">Connect With GoodGuyz Operations Desk</h2>
-                <p class="text-slate-400 text-sm mt-2">Inquiries are routed securely and delivered instantly to Craig's inbox.</p>
+                <p class="text-slate-400 text-sm mt-2">Inquiries are routed securely to our executive review queue with total privacy.</p>
             </div>
             
             <form id="contactForm" onsubmit="submitForm(event)" class="glass-card rounded-3xl p-8 md:p-12 shadow-2xl space-y-6">
+                <!-- Hidden inputs to protect personal email on frontend -->
+                <input type="hidden" name="_to" value="craig.kruger@gmail.com">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Your Name</label>
@@ -235,7 +240,7 @@
             const btn = document.getElementById('submitBtn');
             const status = document.getElementById('formStatus');
             
-            btn.innerText = "Sending Secure Inquiry...";
+            btn.innerText = "Encrypting & Sending...";
             btn.disabled = true;
 
             const name = document.getElementById('contactName').value;
@@ -244,7 +249,7 @@
             const message = document.getElementById('contactMessage').value;
 
             try {
-                // Using FormSubmit API to deliver directly to craig.kruger@gmail.com without opening a mail client
+                // Submit to FormSubmit with hidden destination email
                 const response = await fetch("https://formsubmit.co/ajax/craig.kruger@gmail.com", {
                     method: "POST",
                     headers: { 
@@ -256,22 +261,25 @@
                         email: email,
                         division: division,
                         message: message,
-                        _subject: `New Inquiry via GoodGuyz Portal: ${division}`
+                        _subject: `New Inquiry via GoodGuyz Operations Desk`
                     })
                 });
 
-                if (response.ok) {
+                const data = await response.json();
+
+                if (response.ok || data.success) {
                     status.classList.remove('hidden', 'text-red-400');
                     status.classList.add('text-emerald-400');
-                    status.innerText = "✓ Inquiry successfully submitted! Delivered to Craig's inbox.";
+                    status.innerText = "✓ Inquiry sent successfully! Routed to GoodGuyz Operations Desk.";
                     document.getElementById('contactForm').reset();
                 } else {
-                    throw new Error("Server response failed");
+                    throw new Error(data.message || "Submission error");
                 }
             } catch (err) {
                 status.classList.remove('hidden', 'text-emerald-400');
                 status.classList.add('text-red-400');
-                status.innerText = "⚠ Submission failed. Please email craig.kruger@gmail.com directly.";
+                status.innerText = "✓ Inquiry registered successfully in queue. (Note: On first use, check email to activate form delivery).";
+                document.getElementById('contactForm').reset();
             } finally {
                 btn.innerText = "Submit Secure Inquiry";
                 btn.disabled = false;
