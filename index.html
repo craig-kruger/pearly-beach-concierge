@@ -15,23 +15,24 @@
     <!-- Navbar -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/80">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="showPortal('gateway')">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
                     <i class="fa-solid fa-shield-cat text-slate-950 text-lg"></i>
                 </div>
                 <span class="text-xl font-black tracking-tight text-white">GoodGuyz <span class="text-emerald-400 font-light">Group</span></span>
             </div>
             
-            <div class="flex items-center space-x-6 text-sm font-medium text-slate-300">
-                <a href="mailto:craig.kruger@gmail.com" class="px-5 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 text-white transition-all flex items-center space-x-2">
+            <div class="flex items-center space-x-4 text-sm font-medium text-slate-300">
+                <button onclick="showPortal('gateway')" id="navGateway" class="hidden sm:inline-block px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300 hover:text-white">Group Portal</button>
+                <a href="mailto:craig.kruger@gmail.com" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 text-white transition-all flex items-center space-x-2 text-xs">
                     <i class="fa-solid fa-envelope text-emerald-400"></i><span>craig.kruger@gmail.com</span>
                 </a>
             </div>
         </div>
     </nav>
 
-    <!-- Parent Brand Hero Portal -->
-    <section class="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
+    <!-- VIEW 1: GATEWAY (Parent Portal) -->
+    <div id="viewGateway" class="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-6 relative z-10 w-full py-12">
             <div class="text-center mb-16">
@@ -42,7 +43,7 @@
                     Welcome to <span class="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">GoodGuyz Group</span>
                 </h1>
                 <p class="mt-6 text-lg md:text-xl text-slate-400 max-w-2xl mx-auto font-normal">
-                    Select your specialized division below. We operate separate, dedicated service verticals built for specialized excellence.
+                    Select your specialized division below to enter its dedicated operational portal.
                 </p>
             </div>
 
@@ -60,15 +61,10 @@
                         <p class="text-slate-400 text-sm leading-relaxed mb-8">
                             Autonomous cloud security architecture, AWS hardening, Model Context Protocol (MCP) server deployment, and enterprise AI threat modeling.
                         </p>
-                        <ul class="space-y-3 text-slate-300 text-sm mb-8">
-                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-emerald-400"></i><span>Cloud & AI Security Audits</span></li>
-                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-emerald-400"></i><span>Virtual CISO & SecOps Retainers</span></li>
-                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-emerald-400"></i><span>Agentic RCE & IPI Defense</span></li>
-                        </ul>
                     </div>
-                    <a href="#security-portal" onclick="loadSecurityPortal()" class="w-full py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-center shadow-lg shadow-emerald-500/20 transition-all cursor-pointer block">
+                    <button onclick="showPortal('security')" class="w-full py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-center shadow-lg shadow-emerald-500/20 transition-all cursor-pointer">
                         Enter Security Portal <i class="fa-solid fa-arrow-right ml-2"></i>
-                    </a>
+                    </button>
                 </div>
 
                 <!-- Division 2: Overberg Coasts & Estates -->
@@ -82,31 +78,91 @@
                         <p class="text-slate-400 text-sm leading-relaxed mb-8">
                             Elite holiday home stewardship, solar panel maintenance, and smart IoT security monitoring for absentee homeowners in Pearly Beach & Stanford.
                         </p>
-                        <ul class="space-y-3 text-slate-300 text-sm mb-8">
-                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-emerald-400"></i><span>Property Management Tiers (Bronze/Silver/Gold)</span></li>
-                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-emerald-400"></i><span>Solar Inverter Diagnostics & Cleaning</span></li>
-                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-emerald-400"></i><span>Smart IoT Camera Installations</span></li>
-                        </ul>
                     </div>
-                    <a href="#concierge-portal" onclick="loadConciergePortal()" class="w-full py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-center shadow-lg shadow-emerald-500/20 transition-all cursor-pointer block">
+                    <button onclick="showPortal('concierge')" class="w-full py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-center shadow-lg shadow-emerald-500/20 transition-all cursor-pointer">
                         Enter Concierge Portal <i class="fa-solid fa-arrow-right ml-2"></i>
-                    </a>
+                    </button>
                 </div>
 
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Dynamic Portal View Container (Switches based on selection) -->
-    <div id="dynamicPortalContent" class="hidden"></div>
+    <!-- VIEW 2: SECURITY PORTAL -->
+    <div id="viewSecurity" class="hidden pt-28 pb-24 max-w-7xl mx-auto px-6">
+        <button onclick="showPortal('gateway')" class="mb-8 px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 hover:text-white flex items-center space-x-2">
+            <i class="fa-solid fa-arrow-left"></i><span>Back to Group Portal</span>
+        </button>
+        <div class="text-center mb-16">
+            <span class="text-emerald-400 font-bold text-xs uppercase tracking-widest">Division I Portal</span>
+            <h1 class="text-4xl md:text-5xl font-black text-white mt-2">GoodGuyz Security Advisory</h1>
+            <p class="text-slate-400 mt-2 max-w-xl mx-auto">Advanced cloud security architecture, AI threat modeling, and SecOps retainers.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
+            <div class="glass-card rounded-3xl p-8 flex flex-col justify-between shadow-xl">
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Cloud & AI Security Audit</h3>
+                    <div class="text-3xl font-black text-emerald-400 mb-4">Free <span class="text-xs font-normal text-slate-400">/ 30 min</span></div>
+                    <p class="text-slate-400 text-sm mb-6">Review of AWS posture, IAM roles, and agentic LLM pipelines.</p>
+                </div>
+                <a href="#contact" onclick="setDivision('GoodGuyz Security (Cloud / AI Advisory)')" class="py-3 text-center rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm">Request Audit</a>
+            </div>
+            <div class="glass-card border-2 border-emerald-500/50 rounded-3xl p-8 flex flex-col justify-between shadow-xl">
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Virtual CISO Retainer</h3>
+                    <div class="text-3xl font-black text-emerald-400 mb-4">R 20,000 <span class="text-xs font-normal text-slate-400">/ mo</span></div>
+                    <p class="text-slate-400 text-sm mb-6">Continuous threat modeling and automated SecOps pipeline defense.</p>
+                </div>
+                <a href="#contact" onclick="setDivision('GoodGuyz Security (Cloud / AI Advisory)')" class="py-3 text-center rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm">Secure Retainer</a>
+            </div>
+        </div>
+    </div>
 
-    <!-- Direct Contact Section -->
+    <!-- VIEW 3: CONCIERGE PORTAL -->
+    <div id="viewConcierge" class="hidden pt-28 pb-24 max-w-7xl mx-auto px-6">
+        <button onclick="showPortal('gateway')" class="mb-8 px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 hover:text-white flex items-center space-x-2">
+            <i class="fa-solid fa-arrow-left"></i><span>Back to Group Portal</span>
+        </button>
+        <div class="text-center mb-16">
+            <span class="text-emerald-400 font-bold text-xs uppercase tracking-widest">Division II Portal</span>
+            <h1 class="text-4xl md:text-5xl font-black text-white mt-2">Overberg Coasts & Estates</h1>
+            <p class="text-slate-400 mt-2 max-w-xl mx-auto">Pearly Beach & Stanford holiday home stewardship, solar care, and smart IoT security.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <div class="glass-card rounded-3xl p-8 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-2">Bronze Care</h3>
+                    <div class="text-2xl font-black text-emerald-400 mb-4">R 950 <span class="text-xs font-normal text-slate-400">/ mo</span></div>
+                    <p class="text-slate-400 text-sm mb-6">Bi-monthly inspection & storm monitoring.</p>
+                </div>
+                <a href="#contact" onclick="setDivision('Overberg Coasts & Estates (Pearly Beach Concierge)')" class="py-3 text-center rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm">Select Bronze</a>
+            </div>
+            <div class="glass-card border-2 border-emerald-500/50 rounded-3xl p-8 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-2">Silver Management</h3>
+                    <div class="text-2xl font-black text-emerald-400 mb-4">R 1,850 <span class="text-xs font-normal text-slate-400">/ mo</span></div>
+                    <p class="text-slate-400 text-sm mb-6">Weekly inspection, keyholding, & solar check.</p>
+                </div>
+                <a href="#contact" onclick="setDivision('Overberg Coasts & Estates (Pearly Beach Concierge)')" class="py-3 text-center rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm">Select Silver</a>
+            </div>
+            <div class="glass-card rounded-3xl p-8 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-2">Gold Concierge</h3>
+                    <div class="text-2xl font-black text-emerald-400 mb-4">R 3,500 <span class="text-xs font-normal text-slate-400">/ mo</span></div>
+                    <p class="text-slate-400 text-sm mb-6">Full turnkey management & guest handovers.</p>
+                </div>
+                <a href="#contact" onclick="setDivision('Overberg Coasts & Estates (Pearly Beach Concierge)')" class="py-3 text-center rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm">Select Gold</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Direct Contact Section (Shared Across Portals) -->
     <section id="contact" class="py-24 border-t border-slate-900 relative bg-slate-900/20">
         <div class="max-w-3xl mx-auto px-6 relative z-10">
             <div class="text-center mb-12">
-                <span class="text-emerald-400 font-semibold text-xs uppercase tracking-widest">Executive Office</span>
-                <h2 class="text-3xl font-black text-white tracking-tight mt-1">Direct Inquiry to Craig Kruger</h2>
-                <p class="text-slate-400 text-sm mt-2">Send an email directly to <span class="text-emerald-400 font-mono">craig.kruger@gmail.com</span>.</p>
+                <span class="text-emerald-400 font-semibold text-xs uppercase tracking-widest">Direct Communication</span>
+                <h2 class="text-3xl font-black text-white tracking-tight mt-1">Connect Directly With Craig Kruger</h2>
+                <p class="text-slate-400 text-sm mt-2">Send an inquiry straight to <span class="text-emerald-400 font-mono">craig.kruger@gmail.com</span>.</p>
             </div>
             
             <form onsubmit="sendDirectEmail(event)" class="glass-card rounded-3xl p-8 md:p-12 shadow-2xl space-y-6">
@@ -132,7 +188,7 @@
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Message</label>
                     <textarea id="contactMessage" rows="4" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500" placeholder="How can we assist you?"></textarea>
                 </div>
-                <button type="submit" class="w-full py-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black shadow-lg shadow-emerald-500/20 transition-all cursor-pointer">Send Email to craig.kruger@gmail.com</button>
+                <button type="submit" class="w-full py-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black shadow-lg shadow-emerald-500/20 transition-all cursor-pointer">Send Email to Craig</button>
             </form>
         </div>
     </section>
@@ -143,6 +199,36 @@
     </footer>
 
     <script>
+        function showPortal(portal) {
+            document.getElementById('viewGateway').classList.add('hidden');
+            document.getElementById('viewSecurity').classList.add('hidden');
+            document.getElementById('viewConcierge').classList.add('hidden');
+            
+            if (portal === 'gateway') {
+                document.getElementById('viewGateway').classList.remove('hidden');
+                document.getElementById('navGateway').classList.add('hidden');
+                window.scrollTo(0, 0);
+            } else if (portal === 'security') {
+                document.getElementById('viewSecurity').classList.remove('hidden');
+                document.getElementById('navGateway').classList.remove('hidden');
+                window.scrollTo(0, 0);
+            } else if (portal === 'concierge') {
+                document.getElementById('viewConcierge').classList.remove('hidden');
+                document.getElementById('navGateway').classList.remove('hidden');
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function setDivision(divName) {
+            const select = document.getElementById('contactDivision');
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].text.includes(divName.split(' ')[0])) {
+                    select.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+
         function sendDirectEmail(event) {
             event.preventDefault();
             const name = document.getElementById('contactName').value;
@@ -153,14 +239,6 @@
             const mailtoLink = `mailto:craig.kruger@gmail.com?subject=${encodeURIComponent("Inquiry via goodguyz.co.za: " + division)}&body=${encodeURIComponent("Name: " + name + "\nEmail: " + email + "\nDivision: " + division + "\n\nMessage:\n" + message)}`;
             
             window.location.href = mailtoLink;
-        }
-
-        function loadSecurityPortal() {
-            alert("Loading GoodGuyz Security dedicated portal view...");
-        }
-
-        function loadConciergePortal() {
-            alert("Loading Overberg Coasts & Estates dedicated portal view...");
         }
     </script>
 </body>
