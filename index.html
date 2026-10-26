@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GoodGuyz Group | Parent Brand Portal</title>
+    <!-- Force HTTPS Redirection -->
+    <script>
+        if (window.location.protocol === 'http:' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+            window.location.href = 'https://' + window.location.hostname + window.location.pathname + window.location.search;
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -143,7 +149,7 @@
                     <div class="text-2xl font-black text-emerald-400 mb-4">R 1,850 <span class="text-xs font-normal text-slate-400">/ mo</span></div>
                     <p class="text-slate-400 text-sm mb-6">Weekly inspection, keyholding, & solar check.</p>
                 </div>
-                <a href="#contact" onclick="setDivision('Overberg Coasts & Estates (Pearly Beach Concierge)')" class="py-3 text-center rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm cursor-pointer block">Select Silver</a>
+                <a href="#contact" onclick="setDivision('Overberg Coasts & Estates (Pearly Beach Concierge)')" class="py-3 text-center rounded-xl bg-slate-800 hover:bg-slate-400 text-slate-950 font-bold text-sm cursor-pointer block">Select Silver</a>
             </div>
             <div class="glass-card rounded-3xl p-8 flex flex-col justify-between">
                 <div>
